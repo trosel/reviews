@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Review App</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/wouter@v2.3.0/wouter"></script>
+  <script type="module">
+    // Your JavaScript code here
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { Router, Link, Route, Switch, useNavigate, useLocation } from 'wouter';
+
+    // TMDB API endpoint
+    const TMDB_API_KEY = 'YOUR_TMDB_API_KEY';
+    const TMDB_API_URL = 'https://api.themoviedb.org/3';
+    const TMDB_SEARCH_URL = `${TMDB_API_URL}/search/movie`;
+
+    // Autocomplete search component
+    const AutocompleteSearch = () => {
+      const [searchText, setSearchText] = useState('');
+      const [movies, setMovies] = useState([]);
+
+      const handleSearchChange = async (event) => {
+        const { value } = event.target;
+        setSearchText(value);
+
+        // Fetch movies based on search text
+        const response = await fetch(`${TMDB_SEARCH_URL}?api_key=${TMDB_API_KEY}&query=${value}`);
+        const data = await response.json();
+        const results = data.results;
+
+        setMovies(results);
+      };
+
+      return (
+        <div>
+          <input type="text" value={searchText} onChange={handleSearchChange} placeholder="Search for a movie" />
+
+          {movies.length > 0 && (
+            <ul>
+              {movies.map((movie) => (
+                <li key={movie.id}>{movie.title}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      );
+    };
+
+    // Login component
+    const Login = () => {
+      const navigate = useNavigate();
+
+      const handleLogin = () => {
+        // Perform login logic
+        // ...
+
+        // Navigate to another route
+        navigate('/review');
+      };
+
+      return (
+        <div>
+          <h1>Login</h1>
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      );
+    };
+
+    // Review component
+    const Review = () => {
+        const [selectedMovie, setSelectedMovie] = useState(null);
+
+        const handleMovieSelect = (movie) => {
+        setSelectedMovie(movie);
+        };
+
+        const handleReviewSubmit = (event) => {
+        event.preventDefault();
+        // Submit the review
+        };
+
+        return (
+            <div>
+                <h2>Write a Review</h2>
+                <form onSubmit={handleReviewSubmit}>
+                <div>
+                    <label>
+                    Movie:
+                    <AutocompleteSearch onSelect={handleMovieSelect} />
+                    </label>
+                </div>
+                {selectedMovie && (
+                    <div>
+                    <h3>Selected Movie: {selectedMovie.title}</h3>
+                    {/* Additional review form fields */}
+                    {/* Submit button */}
+                    </div>
+                )}
+                </form>
+            </div>
+            );
+        };
+
+    // ActivityFeed component
+    const ActivityFeed = () => {
+      return (
+        <div>
+          <h1>Activity Feed</h1>
+          {/* Activity feed content goes here */}
+        </div>
+      );
+    };
+
+    // Navigation component
+    const Navigation = () => {
+      const [location, setLocation] = useLocation();
+
+      const handleNavigation = (path) => {
+        setLocation(path);
+      };
+
+      return (
+        <nav>
+          <ul>
+            <li onClick={() => handleNavigation('/login')}>Login</li>
+            <li onClick={() => handleNavigation('/review')}>Write a Review</li>
+            <li onClick={() => handleNavigation('/activity')}>Activity Feed</li>
+          </ul>
+        </nav>
+      );
+    };
+
+    // Root component
+    const App = () => {
+      const [location] = useLocation();
+
+      return (
+        <div>
+          <Navigation />
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/review" component={Review} />
+            <Route path="/activity" component={ActivityFeed} />
+          </Switch>
+        </div>
+      );
+    };
+
+    // Render the app
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(
+      <Router>
+        <App />
+      </Router>,
+      rootElement
+    );
+  </script>
+</body>
+</html>
