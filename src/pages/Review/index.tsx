@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AutocompleteSearch } from "./AutocompleteSearch";
+import SignPublishEvent from "./SignPublishEvent";
 
 export const Review = () => {
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
@@ -31,6 +32,7 @@ export const Review = () => {
           </div>
         )}
       </form>
+      <SignPublishEvent />
     </div>
   );
 };

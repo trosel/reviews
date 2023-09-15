@@ -1657,6 +1657,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@nostr-dev-kit/ndk-react@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@nostr-dev-kit/ndk-react/-/ndk-react-0.1.1.tgz#e812fee6264515bca56810517e226fc1ae367f8c"
+  integrity sha512-iUDK2yYx3uo3epgZPPFAU11yQZppNioaOkQ4gkS2hNXoS2/H6dwvgSrVIWEZD2u41QyipDk+lD8juSIiYRNeTA==
+  dependencies:
+    ramda "^0.29.0"
+
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.10"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.10.tgz#2eba163b8e7dbabb4ce3609ab5e32ab63dda3ef8"
@@ -7460,6 +7467,11 @@ raf@^3.4.1:
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
   dependencies:
     performance-now "^2.1.0"
+
+ramda@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.29.0.tgz#fbbb67a740a754c8a4cbb41e2a6e0eb8507f55fb"
+  integrity sha512-BBea6L67bYLtdbOqfp8f58fPMqEwx0doL+pAi8TZyp2YWz8R9G8z9x75CZI8W+ftqhFHCpEX2cRnUUXK130iKA==
 
 randombytes@^2.1.0:
   version "2.1.0"

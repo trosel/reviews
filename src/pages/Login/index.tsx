@@ -1,21 +1,16 @@
-import React from 'react'
-import { useLocation } from 'wouter';
+import React from 'react';
+import LogInExtension from "./LogInExtension";
+import LogInNostrConnect from "./LogInNostrConnect";
+import LogInSecret from "./LogInSecret";
 
 export const Login = () => {
-  const [location, setLocation] = useLocation();
-
-  const handleLogin = () => {
-    // Perform login logic
-    // ...
-
-    // Navigate to another route
-    setLocation('/review');
-  };
 
   return (
     <div>
-      <h1>Login</h1>
-      <button onClick={handleLogin}>Login</button>
+      <h2 id="Signers">Signers</h2>
+      <LogInExtension />
+      <LogInNostrConnect />
+      <LogInSecret />
     </div>
   );
 };
