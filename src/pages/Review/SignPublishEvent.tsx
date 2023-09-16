@@ -16,8 +16,15 @@ export default function SignPublishEvent() {
     note.kind = 1985;
     note.content = "This was okay!";
     note.tags = [
-        ["r", selectedMovie.id],
-        ["l", "tmdb.movie", "com.thing.creativework.movie.review", "{\"quality\": 0.9}"],
+        ["r", "https://www.themoviedb.org/movie/" + selectedMovie.id, ], // themoviedb.org ID
+        ["r", selectedMovie.title + " | " + selectedMovie.release_date.split("-")[0]], // plain text like "Barbie | 2023"
+        ["L", "org.schema"],
+        [
+            "l", 
+            "org.schema.thing.creativework.movie.review", 
+            "org.schema", 
+            "{\"quality\": 0.9}" // rating
+        ],
     ];
 
     const event = await signPublishEvent(note);
